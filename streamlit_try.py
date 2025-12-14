@@ -1,7 +1,6 @@
 import streamlit as st
+import torch
 from echo import load_model, load_tokenizer, predict_intent
-
-torch.classes.__path__ = []
 
 model = load_model()
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -17,7 +16,7 @@ if st.button("Prédire l'émotion", key="predict_button"):
         st.write("Le texte est vide !")
     else:
         intent, confidence = predict_intent(text, model, tokenizer, device)
-        st.write(f"Intention: {confidence:.2%}")
+        st.write(f"Intention: {intent:.2%}")
         st.write(f"Confiance: {confidence:.2%}")
 
 # You can access the value at any point with:
